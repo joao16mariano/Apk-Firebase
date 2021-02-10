@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sensoriamento Realtime com Firebase</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <style>
+      body{
+      background-color: #a6afb1;
+      }
+
+      .content {
+        margin-top: 30px;
+      }
+
+      nav {
+       background-image: linear-gradient(57deg,rgba(255,255,255,1.00) 0%,rgba(21,8,8,1.00) 46.63%,rgba(255,0,0,1.00) 100%);
+      }
+	  
+	 .lampada{
+		display: block;
+    margin-left: auto;
+    margin-right: auto		 
+	padding:10px;
+	font-size:30px;
+	text-align:center;	
+	-webkit-box-shadow: 20px 20px 10px #000;
+	-moz-box-shadow: 20px 20px 10px #000;	
+	font-weight: bold;
+	font-style: italic;	
+	 background-image:  linear-gradient(to bottom, #f73805, #2e35cd);
+	color: #fbf9f9;
+	text-shadow: -4px -4px 4px #000;	
+		 }
+		 
+		 .lampada2{
+		display: block;
+    margin-left: auto;
+    margin-right: auto		 
+	padding:10px;
+	font-size:30px;
+	text-align:center;	
+	-webkit-box-shadow: 20px 20px 10px #000;
+	-moz-box-shadow: 20px 20px 10px #000;	
+	font-weight: bold;
+	font-style: italic;	
+	 background-image:  linear-gradient(to bottom, #0549f7, #010107);
+	color: #fbf9f9;
+	text-shadow: -4px -4px 4px #000;	
+		 }
+		 
+		 .lampada3{
+		display: block;
+    margin-left: auto;
+    margin-right: auto		 
+	padding:10px;
+	font-size:30px;
+	text-align:center;	
+	-webkit-box-shadow: 20px 20px 10px #000;
+	-moz-box-shadow: 20px 20px 10px #000;	
+	font-weight: bold;
+	font-style: italic;	
+	 background-image:  linear-gradient(to bottom, #eeba04, #25600e);
+	color: #fbf9f9;
+	text-shadow: -4px -4px 4px #000;	
+		 }
+		 
+
+      .statistic {
+        font-size: 8em;
+        margin-top: 15px !important;
+      }
+
+      .card {
+        min-height: 250px;
+      }
+
+      .activator {
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 600px){
+        .statistic {
+          font-size: 5em;
+        }
+      }
+	  
+	  .card-image2{
+		 background-color: #40465f;
+		
+		
+
+		  }
+
+    .fundo3 {
+	background:  linear-gradient( 45deg, red, green, yellow, blue );
+}
+    .esp {
+	display: block;
+    margin-left: auto;
+    margin-right: auto		 
+	padding:10px;
+	font-size:30px;
+	text-align:center;	
+	-webkit-box-shadow: 20px 20px 10px #000;
+	-moz-box-shadow: 20px 20px 10px #000;	
+	font-weight: bold;
+	font-style: italic;	
+	 background-image:  linear-gradient(to bottom, #f73805, #2e35cd);
+	color: #fbf9f9;
+	text-shadow: -4px -4px 4px #000;		
+}
+
+.Rele {
+	display: 10px; 
+	  margin-left: 10px;
+    margin-right: 10px; 	
+	background:#124550;	
+	padding:4px;
+	font-size:18px;
+	text-align:center;
+	box-shadow:5px 5px 2px #060;	
+	border-radius: 20px;
+	font-weight: bold;
+	font-style: italic;	
+	color: #f3f7f8;
+}
+	
+
+    </style>
+
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav class="nav-extended">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">IoT Mariano</a>
+        </div>
+        <div class="nav-content center">
+          <h6>Controlando ESP8266 com Firebase</h6>
+        </div>
+      </nav>
+    </div>
+   <tr>mmm</tr>
+     <table width="548" border="1" align="center">
+  
+  <tr>
+    <td><strong class="esp">ESP8266 1</strong></td>
+  
+</table>  
+        
+  <table width="548" border="1" align="center">
+  <tr>
+    <td width="275"> <div class="card center " style="padding-bottom:20px">
+            <div class="card-image2 center ">
+            <div class="lampada">Garagem</div>
+              <i id="currentLamp" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele ">
+                Rele D1 - Sala
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+              
+    <td width="257"> <div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center">
+            <div class="lampada">Sala</div>
+              <i id="currentLamp1" class="material-icons statistic">flash_on</i>
+              
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D2 - Televisor
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp1">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+  </tr>
+  <tr>
+    <td> <div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center">
+            <div class="lampada">Corredor</div>
+              <i id="currentLamp2" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D3 - Area
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp2">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+              
+    <td> <div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+            <div class="lampada">Cozinha</div>
+              <i id="currentLamp3" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D5 - Garagem
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp3">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+  </tr>
+  
+</table>
+
+<table width="548" border="1" align="center">
+  
+  <tr>
+    <td><strong class="lampada2">ESP8266 2</strong></td>
+  
+</table>
+ 
+
+<table width="548" border="1" align="center">
+  <tr>
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+            <div class="lampada2">Cozinha</div>
+              <i id="currentLamp4" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D1
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp4">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+              
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+            <div class="lampada2">Corredor</div>
+              <i id="currentLamp5" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D2
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp5">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+  </tr>
+  <tr>
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+             <div class="lampada2">Sala</div>
+              <i id="currentLamp6" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D3
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp6">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+              
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+            <div class="lampada2">Corredor</div>
+              <i id="currentLamp7" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D5
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp7">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+  </tr>
+</table>
+
+<table width="548" border="1" align="center">
+  
+  <tr>
+    <td><strong class="lampada3">ESP8266 3</strong></td>
+  
+</table>
+<table width="548" border="1" align="center">
+  <tr>
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+            <div class="lampada3">Corredor</div>
+              <i id="currentLamp8" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D1
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp8">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+             <div class="lampada3">Corredor</div>
+              <i id="currentLamp9" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D2
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp9">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+  </tr>
+  <tr>
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+             <div class="lampada3">Corredor</div>
+              <i id="currentLamp10" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D3
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp10">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+    <td><div class="card center" style="padding-bottom:20px">
+            <div class="card-image2 center ">
+             <div class="lampada3">Corredor</div>
+              <i id="currentLamp11" class="material-icons statistic">flash_on</i>
+            </div>
+            <div class="card-content">
+              <span class="Rele center">
+                Rele D5
+              </span>
+              <a class="waves-effect waves-light btn col s12" id="btn-lamp11">
+                <i class="material-icons left">flash_on</i>
+                Ligar/Desligar
+              </a></td>
+  </tr>
+</table>
+
+
+</body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script src="app.js"></script>
+</html>

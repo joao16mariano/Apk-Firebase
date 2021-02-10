@@ -1,0 +1,74 @@
+#include <ESP8266WiFi.h>
+#include <FirebaseArduino.h>
+#include <Ticker.h>
+#include "DHT.h"
+
+// Set these to run example.
+#define FIREBASE_HOST "joao-e0c75.firebaseio.com"
+#define FIREBASE_AUTH "YQO4u3dec4TJ77NKImwekW3w4OiUPvMxC7gUOGk0"
+#define WIFI_SSID "Joao10Mariano"
+#define WIFI_PASSWORD "mariano75"
+
+#define LAMP1_PIN D2
+#define LAMP2_PIN D3
+#define LAMP_PIN D4
+#define LAMP3_PIN D5
+
+
+void setupWifi(){
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("connecting");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println();
+  Serial.print("connected: ");
+  Serial.println(WiFi.localIP());
+}
+
+
+
+void setup() {
+
+   pinMode(LAMP_PIN, OUTPUT);
+  digitalWrite(LAMP_PIN, LOW); 
+
+   pinMode(LAMP1_PIN, OUTPUT);
+  digitalWrite(LAMP1_PIN, LOW); 
+
+  pinMode(LAMP2_PIN, OUTPUT);
+  digitalWrite(LAMP2_PIN, LOW);
+
+  pinMode(LAMP3_PIN, OUTPUT);
+  digitalWrite(LAMP3_PIN, LOW);
+
+   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+  Serial.begin(9600);
+   
+  setupWifi();  
+
+    
+}
+
+void loop() { 
+ 
+
+  // Verifica o valor da lampada no firebase Led 1
+  bool lampValue = Firebase.getBool("lamp");
+  digitalWrite(LAMP_PIN, lampValue ? HIGH : LOW);
+delay(200);
+  // Verifica o valor da lampada no firebase Led 2
+  bool lampValue1 = Firebase.getBool("lamp2");
+  digitalWrite(LAMP1_PIN, lampValue1 ? HIGH : LOW); 
+
+  // Verifica o valor da lampada no firebase Led 3
+  bool lampValue2 = Firebase.getBool("lamp3");
+  digitalWrite(LAMP2_PIN, lampValue2 ? HIGH : LOW); 
+
+   // Verifica o valor da lampada no firebase  Led 4
+  bool lampValue3 = Firebase.getBool("lamp4");
+  digitalWrite(LAMP3_PIN, lampValue3 ? HIGH : LOW);
+  
+  delay(200);
+}
